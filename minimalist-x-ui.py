@@ -172,7 +172,7 @@ class MinimalistUI:
         self.success_message.after(5000, clean_up_success)
 
 # The following code block is executed when the script is run directly (not imported as a module)
-if __name__ == "__minimalist-x-ui__":
+if __name__ == "__main__":
     root = tk.Tk()
     app = MinimalistUI(root)
     root.mainloop()
