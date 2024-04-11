@@ -168,6 +168,7 @@ class MinimalistUI:
             self.success_message.destroy()
             # Clear the text input area
             self.text_input.delete("1.0", tk.END)
+            self.progress_bar['value'] = 0
 
         self.success_message.after(5000, clean_up_success)
 
