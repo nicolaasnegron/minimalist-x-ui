@@ -25,10 +25,10 @@ class MinimalistUI:
         # Authenticate session w/ X API via OAuth 1.0a
         # Retrieve key, token, and secrets from environmental variables
         self.client = tweepy.Client(
-            consumer_key = str(os.getenv('X_API_KEY')),
-            consumer_secret = str(os.getenv('X_API_SECRET')),
-            access_token = str(os.getenv('X_ACCESS_TOKEN')),
-            access_token_secret = str(os.getenv('X_ACCESS_SECRET')))
+            consumer_key = os.getenv('X_API_KEY'),
+            consumer_secret = os.getenv('X_API_SECRET'),
+            access_token = os.getenv('X_ACCESS_TOKEN'),
+            access_token_secret = os.getenv('X_ACCESS_SECRET'))
 
         # For debugging API connection
         # print("API setup complete")
@@ -156,9 +156,11 @@ class MinimalistUI:
                 self.clear_input_and_print_success()
             except tweepy.TweepyException as e:
                 print(f"Tweepy Error: {e}")
+                self.clear_input_and_print_error()
                 raise
             except Exception as e:
                 print(f"General Error: {e}")
+                self.clear_input_and_print_error()
                 raise
 
     def clear_input_and_print_success(self):
@@ -167,14 +169,23 @@ class MinimalistUI:
                                     text="Tweet successfully sent!",
                                     foreground="#03A062")
         self.success_message.pack()
-        def clean_up_success():
-            # Optional: remove the success message after a few seconds
+
+    def clear_input_and_print_error(self):
+        # Display a failure message
+        self.failure_message = ttk.Label(self.root,
+                                    text="Tweet failed to send!",
+                                    foreground="#D11A2A")
+        self.failure_message.pack()
+        def clean_up():
+            # Optional: remove the success or failure  message after a few sec
             self.success_message.destroy()
+            self.failure_message.destroy()
             # Clear the text input area
             self.text_input.delete("1.0", tk.END)
             self.progress_bar['value'] = 0
 
-        self.success_message.after(5000, clean_up_success)
+        self.success_message.after(5000, clean_up)
+        self.error_message.after(5000, clean_up)
 
 # The following code block is executed when the script is run directly
 if __name__ == "__main__":
