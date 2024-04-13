@@ -71,7 +71,8 @@ class MinimalistUI:
         self.text_input = tk.Text(self.root, height=12, width=60,
                              background='#252526',
                              foreground='#FEFEFE', wrap='word')
-        self.text_input.config(font=('Arial Narrow', 12), undo=True, wrap='word')
+        self.text_input.config(font=('Arial Narrow', 12),
+                               undo=True, wrap='word')
         self.text_input.pack()
         self.text_input.bind('<KeyRelease>', self.update_progress)
         return self.text_input
@@ -162,7 +163,8 @@ class MinimalistUI:
 
     def clear_input_and_print_success(self):
         # Display a success message
-        self.success_message = ttk.Label(self.root, text="Tweet successfully sent!",
+        self.success_message = ttk.Label(self.root,
+                                    text="Tweet successfully sent!",
                                     foreground="#03A062")
         self.success_message.pack()
         def clean_up_success():
@@ -174,7 +176,7 @@ class MinimalistUI:
 
         self.success_message.after(5000, clean_up_success)
 
-# The following code block is executed when the script is run directly (not imported as a module)
+# The following code block is executed when the script is run directly
 if __name__ == "__main__":
     root = tk.Tk()
     app = MinimalistUI(root)
