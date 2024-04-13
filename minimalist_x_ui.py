@@ -155,8 +155,10 @@ class MinimalistUI:
                 self.clear_input_and_print_success()
             except tweepy.TweepyException as e:
                 print(f"Tweepy Error: {e}")
+                raise
             except Exception as e:
                 print(f"General Error: {e}")
+                raise
 
     def clear_input_and_print_success(self):
         # Display a success message
